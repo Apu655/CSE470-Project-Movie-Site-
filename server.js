@@ -5,7 +5,7 @@ const app =  express()
 
 app.use(express.json())
 
-app.listen(3000,()=>{
+app.listen(5000,()=>{
     console.log("listening to port 3000")
 })
 
@@ -17,8 +17,8 @@ app.get("/",authenticateToken, (req,res)=>{
 app.post("/login",(req,res)=>{
     // Authenticate User
 
-    const username = req.body.username
-    const user = {name:username}
+    const {username,email} = req.body
+    const user = {name:username,email:email}
     // const password = req.body.password
 
     const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
