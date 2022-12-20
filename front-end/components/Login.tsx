@@ -16,10 +16,11 @@ const Login = (props: Props) => {
     // })
     const handleChange = (e:any)=>{
         const {value,name} = e.target
-        setUser((prev:any)=>{
+        setUserInfo((prev:any)=>{
             return {...prev,[name]:value}
         })
         console.log(user)
+        console.log("UserInfo : ",userInfo)
 
     }
     const handleSubmit = async (e:any)=>{
@@ -34,7 +35,7 @@ const Login = (props: Props) => {
         })
         console.log(res)
         const data = await res.json()
-        setUser()
+        setUser(data["accessToken"])
         console.log(data)
     }
   return (
