@@ -16,8 +16,10 @@ const Login = (props: Props) => {
     // })
     const handleChange = (e:any)=>{
         const {value,name} = e.target
-        console.log("Value:",value)
-        console.log("Name",name)
+        setUser((prev:any)=>{
+            return {...prev,[name]:value}
+        })
+        console.log(user)
 
     }
     const handleSubmit = async (e:any)=>{
@@ -27,7 +29,7 @@ const Login = (props: Props) => {
             headers:{
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify(userInfo)
+            body: JSON.stringify(user)
 
         })
         console.log(res)
