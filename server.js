@@ -30,7 +30,7 @@ app.post("/login",(req,res)=>{
     // const password = req.body.password
 
     const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
-    res.json({accessToken:accessToken})
+    res.json({accessToken:jwt.decode(accessToken)})
 
 })
 
