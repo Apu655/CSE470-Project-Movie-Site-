@@ -4,9 +4,20 @@ import Header from '../components/Header'
 import Navbar from '../components/Navbar'
 import Results from '../components/Result'
 import requests from '../utils/requests'
+import {useEffect,useContext} from "react"
+import { userAgent } from 'next/server'
+import { UserContext } from '../context/UserContext'
+import Router from 'next/router'
 
 const Home: NextPage = ({results}:any) => {
+  const {user,setUser} = useContext(UserContext)
   //console.log(results)
+  useEffect(()=>{
+    if (user.username){
+      Router.push("/login")
+    }
+    console.log("user from index page: ",user)
+  },[])
 
   return (
     <div >

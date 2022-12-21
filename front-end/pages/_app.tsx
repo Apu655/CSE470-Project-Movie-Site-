@@ -5,14 +5,15 @@ import {useState} from "react"
 
 export default function App({ Component, pageProps }: AppProps) {
   const [user,setUser] = useState({
-    username:"",
+    username:null,
     email:""
   })
 
   const [authToken,setAuthToken] = useState()
+  const [query,setQuery] = useState("")
   return (
 
-  <UserContext.Provider value={{user,setUser,authToken,setAuthToken}}>
+  <UserContext.Provider value={{user,setUser,authToken,setAuthToken,query,setQuery}}>
     <Component {...pageProps} />
   </UserContext.Provider>
 

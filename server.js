@@ -1,7 +1,26 @@
-require('dotenv').config()
-const express = require("express")
-const jwt = require ("jsonwebtoken")
-const cors = require("cors")
+require('dotenv').config();
+const express = require("express");
+const jwt = require ("jsonwebtoken");
+const cors = require("cors");
+const mysql = require("mysql");
+
+
+// Creating MYSQL Connection
+const db = mysql.createConnection(
+    {
+        host     : 'localhost',
+        user     : 'root',
+        password : '',
+        database : 'cse470'
+    }
+)
+db.connect((err)=>{
+    if(err){
+        throw err;
+    }
+    console.log("MySQL connected")
+
+})
 
 
 const app =  express()
@@ -26,11 +45,11 @@ app.post("/login",(req,res)=>{
     // Authenticate User
 
     const {username,email} = req.body
-    const user = {name:username,email:email}
+    const user = {username:username,email:email}
     // const password = req.body.password
 
     const accessToken = jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
-    res.json({accessToken:jwt.decode(accessToken)})
+    res.json({accessToken:accessToken})
 
 })
 

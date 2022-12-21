@@ -1,5 +1,7 @@
 import React,{useState,useContext} from 'react'
 import {UserContext} from "../context/UserContext"
+import Router from 'next/router'
+import jwtDecode from 'jwt-decode'
 type Props = {}
 
 const Login = (props: Props) => {
@@ -30,13 +32,16 @@ const Login = (props: Props) => {
             headers:{
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(userInfo)
 
         })
         console.log(res)
         const data = await res.json()
-        setUser(data["accessToken"])
-        console.log(data)
+        setUser(jwtDecode(data.accessToken))
+        Router.push("/")
+        
+        // setUser(data["accessToken"])
+        // Router.push("/")
     }
   return (
     <div className=''>
